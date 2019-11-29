@@ -1,0 +1,18 @@
+FROM golang:alpine as builder
+WORKDIR /go/src/clarifaiassignment
+COPY . .
+RUN apk add git
+# Downloads package dependencies
+RUN go get -d -v ./...
+# Installs package dependencies
+RUN go install -v ./...
+
+# Environment variables necessary for running the app
+ENV MODEL_ID aaa03c23b3724a16a56b629203edc62c
+ENV MODEL_VERSION aa7f35c01e0642fda5cf400f543e7c40
+ENV API_KEY 
+ENV UI_TYPE TUI
+
+RUN go build -o main .
+
+CMD ["./main"]

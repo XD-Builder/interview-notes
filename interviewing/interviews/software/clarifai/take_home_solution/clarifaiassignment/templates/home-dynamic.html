@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <style>
+      .ui-autocomplete {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1000;
+        display: none;
+        float: left;
+        min-width: 160px;
+        padding: 5px 0;
+        margin: 2px 0 0;
+        list-style: none;
+        font-size: 14px;
+        text-align: left;
+        background-color: #ffffff;
+        border: 1px solid #cccccc;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        border-radius: 4px;
+        -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+        background-clip: padding-box;
+      }
+
+      .ui-autocomplete > li > div {
+        display: block;
+        padding: 3px 20px;
+        clear: both;
+        font-weight: normal;
+        line-height: 1.42857143;
+        color: #333333;
+        white-space: nowrap;
+      }
+
+      .ui-state-hover,
+      .ui-state-active,
+      .ui-state-focus {
+        text-decoration: none;
+        color: #262626;
+        background-color: #f5f5f5;
+        cursor: pointer;
+      }
+
+      .ui-helper-hidden-accessible {
+        border: 0;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+      }
+    </style>
+    <title>Clarifai Assignment Home Page</title>
+  </head>
+  <body>
+    <div class="container justify-content-center">
+      <div class="row justify-content-center">
+        <div class="row my-4">
+          <h1>Welcome to Clarifai Image Ranking GUI</h1>
+        </div>
+      </div>
+      <form
+        id="searchForm"
+        action="/predict"
+        class="form-inline justify-content-center"
+      >
+        <div class="form-group col-5 mx-sm-3 mb-2">
+          <label for="label" class="sr-only">Label</label>
+          <input
+            autocomplete="off"
+            type="text"
+            class="col-12 form-control"
+            id="label-input"
+            placeholder="find images by label now!"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Submit</button>
+      </form>
+      <div id="image-container"></div>
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+      <!-- have to use 1.12 and comment out 3.3.1 in order for auto complete to work -->
+      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+      <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+      <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"
+      ></script>
+
+      <!-- have to use 3.3.7 for the search box to show up perfectly! -->
+      <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" ></script> -->
+      <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
+
+      <script>
+        var labels = {{.Labels}}
+        $(function() {
+            $("#label-input").autocomplete({source: labels});
+        });
+
+        $('#searchForm').submit(function(e){
+            e.preventDefault();
+            var $form = $(this),
+                term = $form.find("input#label-input").val(),
+                urlEndpoint = $form.attr("action");
+
+
+            $.ajax({
+                type: "POST",
+                contentType: 'application/json; charset=utf-8',
+                url: urlEndpoint,
+                data: JSON.stringify({label:term}),
+                dataType: "json",
+                success: function(predictionURLs){
+                    var html = ""
+                    var label = $('#searchForm #label-input').val()
+                    html += "<div class=\"w-100 my-3\"></div>"
+                    html += "<div class=\"row\">"
+                    for (i = 0; i < predictionURLs.length; i++ ){
+                        if (i % 4 == 0){
+                            html += "<div class=\"w-100 my-3\"></div>"
+                        }
+                        var url = predictionURLs[i]
+                        html += "<div class=\"col-3\">"
+                        html += "<img src=\""+ url + "\" class=\"img-fluid\" alt=\"responsive image\">"
+                        html += "</div>"
+                    }
+                    html +="</div>"
+
+                    $("#image-container").html(html)
+                    $('#searchForm #label-input').val("")
+                }
+            })
+        })
+      </script>
+    </div>
+  </body>
+</html>

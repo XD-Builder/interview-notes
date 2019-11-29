@@ -1,0 +1,15 @@
+# Abstract
+
+- This document explores methodologies to upgrade systems at scale.
+
+## Patch Management
+
+1. Introduction
+   1. I had thought that I was done with the series, but then **the WannaCry malware came out and exposed some of the poor patch management practices still in place in Windows networks**. I imagine some readers that are still stuck in the Linux versus Windows wars of the 2000s might have even smiled with a sense of superiority when they heard about this outbreak.
+   2. **Most Linux system administrators are no different from Windows sysadmins when it comes to patch management.** Honestly, in some areas (in particular, uptime pride), some Linux sysadmins are even worse than Windows sysadmins regarding patch management. So in this article, I cover some of the fundamentals of patch management under Linux, including what a good patch management system looks like, the tools you will want to put in place and how the overall patching process should work.
+2. What Good Patch Management Looks Like
+   1. Patch management starts with **knowing that there is a software update to begin with**. First, **for your core software, you should be subscribed to your Linux distribution's security mailing list, so you're notified immediately when there are security patches**. If there you use any software that doesn't come from your distribution, **you must find out how to be kept up to date on security patches for that software as well**. When new security notifications come in, **you should review the details so you understand how severe the security flaw is, whether you are affected and gauge a sense of how urgent the patch is**.
+   2. The **faster and easier patch management is, the more likely you are to do it**. You should have a system in place that quickly can tell you which servers are running a particular piece of software at which version. Ideally, that system also can push out updates. Personally, I prefer **orchestration tools like MCollective for this task, but Red Hat provides Satellite, and Canonical provides Landscape as central tools that let you view software versions across your fleet of servers and apply patches all from a central place.**
+3. Patching Approaches across upgrades
+   1. Patching **should be fault-tolerant as well**. You should be able to **patch a service and restart it without any overall down time**. The same idea goes for kernel patches that require a reboot. My approach is to **divide my servers into different high availability groups so that lb1, app1, rabbitmq1 and db1 would all be in one group, and lb2, app2, rabbitmq2 and db2 are in another**. Then, I know I can **patch one group at a time without it causing downtime anywhere else**.
+   2. When patching requires a reboot, such as in the case of kernel patches, it might take a bit more time, but again, **automation and orchestration tools can make this go much faster than you might imagine. I can patch and reboot the servers in an environment in a fault-tolerant way within an hour or two, and it would be much faster than that if I didn't need to wait for clusters to sync back up in between reboots**.

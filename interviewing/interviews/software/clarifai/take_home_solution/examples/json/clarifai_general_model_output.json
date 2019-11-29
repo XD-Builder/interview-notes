@@ -1,0 +1,168 @@
+{
+    "status": {
+        "code": 10000,
+        "description": "Ok"
+    },
+    "outputs": [
+        {
+            "id": "d76a3b2850654c26844ef4ff6e304519",
+            "status": {
+                "code": 10000,
+                "description": "Ok"
+            },
+            "created_at": "2019-03-09T22:03:46.826721754Z",
+            "model": {
+                "id": "aaa03c23b3724a16a56b629203edc62c",
+                "name": "general",
+                "created_at": "2016-03-09T17:11:39.608845Z",
+                "app_id": "main",
+                "output_info": {
+                    "message": "Show output_info with: GET /models/{model_id}/output_info",
+                    "type": "concept",
+                    "type_ext": "concept"
+                },
+                "model_version": {
+                    "id": "aa7f35c01e0642fda5cf400f543e7c40",
+                    "created_at": "2018-03-06T21:10:24.454834Z",
+                    "status": {
+                        "code": 21100,
+                        "description": "Model trained successfully"
+                    }
+                },
+                "display_name": "General"
+            },
+            "input": {
+                "id": "b39016c0c3f4487f838b405bf5da1158",
+                "data": {
+                    "image": {
+                        "url": "https://samples.clarifai.com/metro-north.jpg"
+                    }
+                }
+            },
+            "data": {
+                "concepts": [
+                    {
+                        "id": "ai_HLmqFqBf",
+                        "name": "train",
+                        "value": 0.99960643,
+                        "app_id": "main"
+                    },
+                    {
+                        "id": "ai_fvlBqXZR",
+                        "name": "railway",
+                        "value": 0.99930024,
+                        "app_id": "main"
+                    },
+                    {
+                        "id": "ai_SHNDcmJ3",
+                        "name": "subway system",
+                        "value": 0.9982546,
+                        "app_id": "main"
+                    },
+                    {
+                        "id": "ai_6kTjGfF6",
+                        "name": "station",
+                        "value": 0.9980149,
+                        "app_id": "main"
+                    },
+                    {
+                        "id": "ai_RRXLczch",
+                        "name": "locomotive",
+                        "value": 0.9972681,
+                        "app_id": "main"
+                    },
+                    {
+                        "id": "ai_Xxjc3MhT",
+                        "name": "transportation system",
+                        "value": 0.9969799,
+                        "app_id": "main"
+                    },
+                    {
+                        "id": "ai_VRmbGVWh",
+                        "name": "travel",
+                        "value": 0.98898005,
+                        "app_id": "main"
+                    },
+                    {
+                        "id": "ai_jlb9q33b",
+                        "name": "commuter",
+                        "value": 0.9808915,
+                        "app_id": "main"
+                    },
+                    {
+                        "id": "ai_2gkfMDsM",
+                        "name": "platform",
+                        "value": 0.980677,
+                        "app_id": "main"
+                    },
+                    {
+                        "id": "ai_n9vjC1jB",
+                        "name": "light",
+                        "value": 0.97425723,
+                        "app_id": "main"
+                    },
+                    {
+                        "id": "ai_sQQj52KZ",
+                        "name": "train station",
+                        "value": 0.9687987,
+                        "app_id": "main"
+                    },
+                    {
+                        "id": "ai_l4WckcJN",
+                        "name": "blur",
+                        "value": 0.9672028,
+                        "app_id": "main"
+                    },
+                    {
+                        "id": "ai_WBQfVV0p",
+                        "name": "city",
+                        "value": 0.96151996,
+                        "app_id": "main"
+                    },
+                    {
+                        "id": "ai_TZ3C79C6",
+                        "name": "road",
+                        "value": 0.9614075,
+                        "app_id": "main"
+                    },
+                    {
+                        "id": "ai_CpFBRWzD",
+                        "name": "urban",
+                        "value": 0.9603823,
+                        "app_id": "main"
+                    },
+                    {
+                        "id": "ai_tr0MBp64",
+                        "name": "traffic",
+                        "value": 0.9598949,
+                        "app_id": "main"
+                    },
+                    {
+                        "id": "ai_GjVpxXrs",
+                        "name": "street",
+                        "value": 0.94753855,
+                        "app_id": "main"
+                    },
+                    {
+                        "id": "ai_mcSHVRfS",
+                        "name": "public",
+                        "value": 0.9343696,
+                        "app_id": "main"
+                    },
+                    {
+                        "id": "ai_J6d1kV8t",
+                        "name": "tramway",
+                        "value": 0.9320683,
+                        "app_id": "main"
+                    },
+                    {
+                        "id": "ai_6lhccv44",
+                        "name": "business",
+                        "value": 0.9293023,
+                        "app_id": "main"
+                    }
+                ]
+            }
+        }
+    ]
+}
